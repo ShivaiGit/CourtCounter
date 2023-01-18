@@ -11,18 +11,24 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-    Button openUrl;
-    EditText enterErl;
+    private EditText enterErl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        openUrl = findViewById(R.id.mb_openUrl);
+        Button openUrl = findViewById(R.id.mb_openUrl);
+        Button openMyCalculate = findViewById(R.id.mb_openCalc);
         enterErl = findViewById(R.id.et_enter_url);
 
-        openUrl.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://" + enterErl.getText().toString()))));
+        openUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent launchCalc = new Intent(Intent.ACTION_VIEW, Uri.parse("calc://launch"));
+                startActivity(Intent.createChooser(launchCalc, "error"));
+            }
+        });
     }
 
 
