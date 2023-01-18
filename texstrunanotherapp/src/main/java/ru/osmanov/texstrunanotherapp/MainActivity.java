@@ -25,9 +25,17 @@ public class MainActivity extends AppCompatActivity {
         openUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent launchCalc = new Intent(Intent.ACTION_VIEW, Uri.parse("calc://launch"));
-                startActivity(Intent.createChooser(launchCalc, "error"));
+                String url = "https://" + enterErl.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+
+                startActivity(Intent.createChooser(intent,"error"));
             }
+        });
+
+        openMyCalculate.setOnClickListener(view -> {
+            Intent launchCalc = new Intent(Intent.ACTION_VIEW, Uri.parse("calc://launch"));
+            startActivity(Intent.createChooser(launchCalc, "error"));
         });
     }
 
